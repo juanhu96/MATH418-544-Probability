@@ -1,0 +1,128 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm} \large{MATH 418/544 Assignment 3}}
+\author{\large{ Jingyuan Hu (Juan) \#41465155}}
+\date{}
+\maketitle
+ 
+\begin{problem}{1(a)}
+\end{problem}
+\begin{proof}
+$\{(-\infty, x]|x\in \mathbb{R}^2\}$ is a $\pi$-system since for arbitrary set $A = (-\infty, a]$ and $B = (-\infty, b]$ where $a = (a_{1}, a_{2}), b = (b_{1}, b_{2})$, we have $A \cap B = (-\infty, c] \in \{(-\infty, x]|x\in \mathbb{R}^2\}$ for some $c = (\min(a_{1}, b_{1}), \min(a_{2}, b_{2}))$. We will next show that $\int1_{B}(y)f(y)dy$ is a probability measure. Becuase $1_{B}(y)$ and $f(y)$ are both non-negative functions by definition, we have $\int1_{B}(y)f(y)dy \ge 0$ for all sets in $(\mathbb{R}^2, \mathcal{B}(\mathbb{R}^2))$, and $\int1_{\emptyset}(y)f(y)dy = 0$.  To show countable additivity, without loss of generality, let $\{B_{i}\}_{i}^{\infty}$ be a collection of disjoint set in $(\mathbb{R}^2, \mathcal{B}(\mathbb{R}^2))$, denote $B = \bigcup\limits_{i=1}^{\infty} B_{i}$, the disjoint union of $B_{i}$. Then by the properties of indicator functions we have $$\sum\limits_{i=1}^{\infty} \int1_{B_{i}}(y)f(y)dy = \int1_{\bigcup\limits_{i=1}^{\infty} B_{i}}(y)f(y)dy = \int1_{B}(y)f(y)dy$$ Therefore we have shown the countable additivity. Also, we have $\int1_{\mathbb{R}^2}(y)f(y)dy = \int f(y)dy = 1$. Hence we've proven that $\int1_{B}(y)f(y)dy$ is a probability measure defined on $(\mathbb{R}^2, \mathcal{B}(\mathbb{R}^2))$. Thus we know $\int1_{B}(y)f(y)dy$ and $P$ are proabilities that agree on $\pi$-system $\{(-\infty, x]|x\in \mathbb{R}^2\}$ where $\{(-\infty, x]|x\in \mathbb{R}^2\} \subset \mathcal{B}(\mathbb{R}^2)$, and by $\textit{proposition 1.16}$ in class we know $\mathcal{B}(\mathbb{R}^2) = \sigma(\mathcal{S}_{2}^{-\infty})$, $\mathcal{S}_{2}^{-\infty} = \{(-\infty, b]| b \in \mathbb{R}^2\}$. 
+According to the $\textit{corollary 1.6}$ of the $\pi - \lambda$ theorem, we know that  $\int1_{B}(y)f(y)dy$ and $P$ agrees on all Borel sets $B$ in $\mathcal{B}(\mathbb{R}^2)$, in other words, $P(X\in B) = \int1_{B}(y)f(y)dy$.
+\end{proof}
+
+\begin{problem}{1(b)}
+\end{problem}
+\begin{proof}
+The distribution function of $Y$ is 
+\begin{equation}
+\begin{split}
+F_{Y}(z) &= P(Y \le z)= P(X_{1}+X_{2} \le z)\\
+&= \int_{\mathbb{R}^2} 1_{\{x_{1}+x_{2} \le z\}} f(x_{1}, x_{2})dx_{1}dx_{2}\\
+&= \int_{\mathbb{R}}dx_{2}\int_{-\infty}^{z-x_{1}} \frac{1}{4} 1_{[0,2]}(x_{1}) 1_{[0,2]}(x_{2})dx_{1}\\
+&= \frac{1}{4} \int_{0}^{2} \Big| (-\infty, z-x_{2}) \cap [0,2]\Big| dx_{2}
+\end{split}
+\end{equation}
+where $\Big| (-\infty, z-x_{2}) \cap [0,2]\Big|$ is the length of the interval. Then we have the distribution function for $Y$:
+\[F_{Y}(z)  = 
+  \begin{cases}
+  0 & \text{if $z < 0$} \\
+  \frac{1}{8}z^2 & \text{if $0 \le z \le 2$} \\
+  -\frac{1}{8}z^2 + z -1 & \text{if $2 < z \le 4$} \\
+  1 & \text{if $z > 4$}
+  \end{cases}
+\]
+By differentiating the distribution function, we can get the probability density function of $Y$:
+\[f_{Y}(z)  = 
+  \begin{cases}
+  \frac{1}{4}z & \text{if $0 \le z \le 2$} \\
+  1-\frac{1}{4}z & \text{if $2 < z \le 4$} \\
+  0 & \text{otherwise}
+  \end{cases}
+\]
+\end{proof}
+
+
+
+\begin{problem}{2}
+\end{problem}
+ 
+\begin{proof}
+Since $Q \sim U(-\frac{\pi}{2}, \frac{\pi}{2})$, then we have\\
+\[f_{Q}(q) = 
+  \begin{cases}
+  \frac{1}{\pi} & \text{if $q \in (-\frac{\pi}{2}, \frac{\pi}{2})$} \\
+  0 & \text{otherwise}
+  \end{cases}
+\]
+The distribution function for $X$: $F_{X}(x) = P(X \le x) = P(tan\theta \le x) = P(\theta \le arctanx)$. So we have $F_{X}(x) =  \frac{arctanx}{\pi} + \frac{1}{2}$ for $x \in \mathbb{R}$. $F'_{X}(x) = \frac{1}{\pi x^2+\pi}$ is continous and by foundamental theorem of calculus, $F_{X}(x) = \int_{-\infty}^{x} \frac{1}{\pi y^2+\pi}dy$. Thus $X$ has the probability density function $f_{X}(x) = F'_{X}(x) = \frac{1}{\pi x^2+\pi}$ for $x \in \mathbb{R}$
+\end{proof}
+
+
+
+\begin{problem}{3}
+\end{problem}
+\begin{proof}
+Need to show $X_{N(\omega)}(\omega)$ is a random variable, then by definition, it is equivalent to show for all set $E \in \mathcal{B}(\mathbb{R})$, $\{\omega: X_{N(\omega)}(\omega) \in E\} \subset \mathcal{F}$. We can rewrite $\{\omega: X_{N(\omega)}(\omega) \in E\}$ as $$\bigcup\limits_{n=1}^{\infty} \Big\{\omega: \big(N(\omega\big)=n) \cap \big(X_{n}(\omega) \in E\big)\Big\}$$ Since $N$ is an $\mathbb{N}$-valued random variable and $X_{n}$ is random variable for all $n \in \mathbb{N}$, we know that $\{\omega: N(\omega) =n)\}$ and $\{\omega: X_{n}(\omega) \in E\}$ are all in $\mathcal{F}$. It is also known that $\mathcal{F}$ is a $\sigma$-field, which is closed under intersection and countable unions. Therefore we have shown that $\bigcup\limits_{n=1}^{\infty} \Big\{\omega: \big(N(\omega\big)=n) \cap \big(X_{n}(\omega) \in E\big)\Big\} \subset \mathcal{F}$, hence we have proven that $X_{N(\omega)}(\omega)$ is a random variable.
+\end{proof}
+
+
+\begin{problem}{4(a)}
+\end{problem}
+\begin{proof}
+Since $X_{n}(\omega) = \omega_{n} \in \{0,1\}$, $X(\omega) = \sum_{n=1}^{\infty}X_{n}(\omega)2^{-n} \in \Big[\sum_{n=1}^{\infty}0\times2^{-n}, \sum_{n=1}^{\infty}1\times2^{-n}\Big]= \big[0, 1\big]$. Therefore the series converges for every $\omega \in \Omega$. For each single $X_{n}(\omega)$, it is Borel measurable. Then by $\textit{theorem 1.3.4}$ from textbook, the finite sum $\sum\limits_{i=1}^{N}X_{i}(\omega)$ is also Borel measurable, denote the sum by $g_{N}$. Since the $\sum_{n=1}^{\infty}X_{n}(\omega)2^{-n}$ converges, we have $\lim\limits_{N\rightarrow \infty} g_{N} = \limsup\limits_{N\rightarrow \infty} g_{N}$, where $\limsup\limits_{N\rightarrow \infty} g_{N}$ is also Borel measurable by $\textit{theorem 1.3.5}$ from textbook. Therefore the infinite sum $X(\omega) = \sum\limits_{n=1}^{\infty}X_{n}(\omega) = \lim\limits_{N\rightarrow \infty} g_{N}$ is Borel measurable, in other words, we have shown that $X(\omega)$ is a random variable taking values in $\big[0, 1\big]$
+\end{proof}
+
+ 
+\begin{problem}{4(b)}
+\end{problem}
+\begin{proof}
+A number $x\in \mathbb{R}$ is dyadic rational number if $x$ has a finite binary expansion, in other words, there exists an integer $m \ge 1$ and $\omega_{1}, \omega_{2}, ..., \omega_{m}$ such that $x = \sum_{n=1}^{m}\omega_{n}2^{-n}$. Then the we can easily show the set of dyadic rational numbers is dense in $\mathbb{R} \cap [0,1]$ (For every $x \in \mathbb{R}\cap[0,1]$ and every $\epsilon > 0$, we can find a dyadic rational number $d$ such that $|d-x| \le \epsilon $). Also notice that every number $x \in \mathbb{R}\cap [0,1]$ either (i) has a unique, non-terminating binary expansion, or (ii) it has two binary expansions, one ending in an infinite sequence of 0’s and the other ending in an infinite sequence of 1’s, in either case of (ii) we have $P(X = x) = \lim_{n\rightarrow \infty}(\frac{1}{2})^n = 0$.
+Take an example of dyadic rational numbers $\frac{0}{2}, \frac{1}{2}, \frac{2}{2}$, the case where $m = 1, i = 0,1$:
+$$X \in [\frac{0}{2}, \frac{1}{2}] = \{X_{1}=0\}\cup\{X_{1}= 1, X_{2}=X_{3}=...=0\}, X \in [\frac{1}{2}, \frac{2}{2}] = \{X_{1}=1\}\cup\{X_{1}= 0, X_{2}=X_{3}=...=1\}$$
+\begin{equation}
+\begin{split}
+P(X \in [\frac{0}{2}, \frac{1}{2}]) &= P(\{X_{1}=0\}) + P(\{X_{1}= 1, X_{2}=X_{3}=...=0\})\\
+&= \frac{1}{2}+\lim_{n\rightarrow \infty}(\frac{1}{2})^n = \frac{1}{2}\\
+\end{split}
+\end{equation}
+Similarly $P(X \in [\frac{1}{2}, \frac{2}{2}]) = \frac{1}{2}$. Generalizing this result by induction, assume this holds for $m=k$, such that 
+\begin{equation}
+\begin{split}
+P(X \in \big[i2^{-k}, (i+1)2^{-k}\big]) &= P(\{X_{1}= w_{1}, X_{2}= w_{2},...,X_{k}= w_{k}\}) \\
+& + P(\{X_{1}= w'_{1}, X_{2}= w'_{2},...,X_{k} = w'_{k}, X_{k+1}= ... = w\}) \\
+& = 2^{-k}, \forall i = 0,...2^{m}-1
+\end{split}
+\end{equation}
+Where the second part include the cases where the sequence ends with either a infinite sequence of 0’s or an infinite sequence of 1’s and has probability 0.
+Then for $m = k+1$, we have
+\begin{equation}
+\begin{split}
+P(X \in \big[i2^{-k+1}, (i+1)2^{-k+1}\big]) &= P(\{X_{1}= 0, X_{2}= w_{1},...,X_{k}= w_{k-1}, X_{k+1}= w_{k}\}) \\
+& + P(\{X_{1}= 0, X_{2}= w'_{1},...,X_{k} = w'_{k-1}, X_{k+1}=w'_{k}, X_{k+2}= ... = w\}) \\
+& = \frac{1}{2} \times 2^{-k} + 0= 2^{-k+1}, \forall i = 0,...2^{m}-1
+\end{split}
+\end{equation}
+Where now the whole binary sequence is shifted to the right by 1 position (think of this as dividing the binary number by 2), where numbers fall between $\big[i2^{-k}, (i+1)2^{-k}\big]$ will fall between $\big[i2^{-k+1}, (i+1)2^{-k+1}\big]$ now and the rest is same as above.
+Then for dyadic rational numbers $i2^{-m}$ and $(i+1)2^{-m}$:
+$$P(X \in \big[i2^{-m}, (i+1)2^{-m}\big]) = 2^{-m}$$
+for every $m\ge 0$ and $i = 0, ..., 2^{m-1}$. Hence for any dyadic rational numbers $a,b$ in $[0,1]$ where $a \le b$, we have $P(X \in \big[a, b\big]) = b-a$ since $a,b$ can written as disjoint union of intervals of dyadic rational numbers. Recall that dyadic rational numbers are also dense in $\mathbb{R}\cap[0,1]$.
+Thus, given any two numbers $a,b$ in $[0,1]$ where $a \le b$ (not necessarily dyadic), we can find a decreasing sequence $\{a_{j}\}$ and a increasing sequence $\{b_{j}\}$ of dyadic rational numbers that converges to $a$ and $b$ respectively. Then we have $$P(X \in (a,b)) = P(X \in \bigcup\limits_{j=1}^{\infty}[a_{j}, b_{j}]) = \lim\limits_{j\rightarrow \infty}P(X \in[a_{j}, b_{j}]) = \lim\limits_{j\rightarrow \infty} (b_{j}- a_{j}) = b-a$$
+by continuity from below (Note that endpoints does not matters, since $P(X = 1) = P(X = 0) = 0$).
+Therefore by definition we have proven that $X$ has a uniform distribution on $[0,1]$.
+\end{proof}
+
+
+
+\end{document}

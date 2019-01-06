@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+ \usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\baselinestretch}{1.5}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm}\large MATH 418 Assignment 1}
+\author{\large Jingyuan Hu (Juan) \#41465155}
+\date{}
+\maketitle
+ 
+\begin{problem}{1}
+\end{problem}
+ 
+\begin{proof}
+Suppose $\omega \in C:$\\
+Then $lim_{n\rightarrow \infty} \frac{S_{n}(\omega)}{n}=\frac{1}{2}$
+$\Rightarrow \forall \epsilon \ge 0, \exists N_{1} \in \mathbb{N}$ s.t. $\forall n \ge N_{1}, |\frac{S_{n}(\omega)}{n} - \frac{1}{2}| \le \epsilon$ \\
+Let $N_{2} = N_{1}$ then $\forall m \ge N_{2}, m^2 \ge N_{2}=N_{1} \Rightarrow |\frac{S_{m^2}(\omega)}{m^2} - \frac{1}{2}| \le \epsilon$\\
+$\therefore lim_{m\rightarrow \infty} \frac{S_{m^2}(\omega)}{m^2}=\frac{1}{2}, \omega \in \hat{C}, C \subseteq \hat{C}$\\
+Now suppose $\omega \in \hat{C}$:\\
+Then $lim_{m\rightarrow \infty} \frac{S_{m^2}(\omega)}{m^2}=\frac{1}{2}, \Rightarrow \forall \epsilon \ge 0, \exists N_{2} \in \mathbb{N}$ s.t. $\forall m \ge N_{2}, |\frac{S_{m^2}(\omega)}{m^2} - \frac{1}{2}| \le \epsilon$\\
+From the definition $S_{n}(w) = \sum_{k=1}^{n}w_{k}$, we know that $S_{n}(w) \le n, \forall n$\\
+$\therefore |S_{n_{1}}(w) - S_{n_{2}}(w)| \le |S_{n_{1}}(w) - n_{1}| + |n_{1} - n_{2}| + |S_{n_{2}}(w) - n_{2}| \le |n_{1} - n_{2}|, \forall n_{1}, n_{2} \in \mathbb{N}$\\
+$\therefore |\frac{S_{n}(w)}{n} - \frac{S_{m^2}(w)}{m^2}| \le |\frac{S_{n}(w)}{n} - \frac{S_{m^2}(w)}{n}| + |\frac{S_{m^2}(w)}{n} - \frac{S_{m^2}(w)}{m^2}| \le \frac{1}{n} |{S_{n}(w)} - {S_{m^2}(w)}| + S_{m^2}(w)|\frac{1}{n} - \frac{1}{m^2}|$\\
+Let $m = \floor*{\sqrt{n}} \in \mathbb{N}$, so $m^{2} \le n < (m + 1)^2$, then:\\
+$\frac{1}{n} |{S_{n}(w)} - {S_{m^2}(w)}| + S_{m^2}(w)|\frac{1}{n} - \frac{1}{m^2}| \le \frac{n-m^2}{n} + m^2|\frac{m^2-n}{nm^2}| \le \frac{n-m^2}{n} + |\frac{m^2-n}{n}| \\
+\le \frac{(m+1)^2-m^2}{m^2} + |\frac{(m+1)^2-m^2}{m^2}| = \frac{4m+2}{m^2} \le \frac{4+\frac{2}{m}}{m} \le \frac{6}{m} \rightarrow 0$ as $m \rightarrow \infty$\\
+$\therefore lim_{n\rightarrow \infty} \frac{S_{n}(\omega)}{n}=\frac{1}{2}, w \in C, \hat{C} \subseteq C$\\
+Therefore we've proved that $C = \hat{C}$
+\end{proof}
+
+
+\begin{problem}{2(a)}
+\end{problem}
+\begin{proof}
+Since $\mathcal{F}_{n}$ is a increasing sequence of fields:\\
+Then $\emptyset \in \mathcal{F}_{n}, \forall n \Rightarrow \emptyset \in \cup_{n=1}^{\infty}\mathcal{F}_{n}$\\
+Let $A \in \cup_{n=1}^{\infty}\mathcal{F}_{n}$, then $\exists k \in \mathbb{N}$ s.t. $A \in \mathcal{F}_{k}$\\
+Since $\mathcal{F}_{k}$ is an field, then we could also know that $A^{c} \in \mathcal{F}_{k} \Rightarrow \therefore A^{c} \in \cup_{n=1}^{\infty}\mathcal{F}_{n}$\\
+Suppose $\{A_{i}\}_{i}^{m}$ is a finite sequence of sets such that $A_{i} \in \cup_{n=1}^{\infty}\mathcal{F}_{n}, \forall i$\\
+Then $\forall i, \exists n_{i} \in \mathbb{N}, A_{i} \in \mathcal{F}_{n_{i}} \Rightarrow \cup_{i=1}^{m}A_{i} \in \cup_{n_{i}}\mathcal{F}_{n_{i}} \Rightarrow \cup_{i=1}^{m}A_{i} \subseteq \cup_{n=1}^{\infty}\mathcal{F}_{n}$\\
+$\therefore \cup_{n=1}^{\infty}\mathcal{F}_{n}$ is also a field
+\end{proof}
+
+
+\begin{problem}{2(b)}
+\end{problem}
+\begin{proof}
+$\Omega = \mathbb{N}$, let $\mathcal{F}_{n} = \{A \subseteq \mathbb{N}: A \in 2^{\{0,1,...,n\}}$ or $A^c \in 2^{\{0,1,...,n\}}\}$\\
+We can verify that $\mathcal{F}_{n}$ is an increasing sequence of sigma fields:\\
+If $A \in \mathcal{F}_{n}$ then either $A \in 2^{\{0,1,...,n\}}$ or $A^c \in 2^{\{0,1,...,n\}}$, hence either $A \in 2^{\{0,1,...,n+1\}}$ or $A^c \in 2^{\{0,1,...,n+1\}}$, so $\mathcal{F}_{n} \subseteq \mathcal{F}_{n+1}$\\
+(i) $\emptyset \in \mathcal{F}_{n}$ since $\emptyset \in  2^{\{0,1,...,n\}}$\\
+(ii) $A \in \mathcal{F}_{n} \Rightarrow A^c \in \mathcal{F}_{n}$ by the construction of $\mathcal{F}_{n}$\\
+(iii) $\{A_{i}\}_{i}^{\infty} \in \mathcal{F}_{n} \Rightarrow$ for all $i$, either $A_{i} \in 2^{\{0,1,...,n\}}$ (we relabel these $A_{i}$ as $A_{j}$), or  $A^c_{i} \in 2^{\{0,1,...,n\}}$(we relabel these $A_{i}$ as $A_{k}$), then $\cup_{i=1}^{\infty}A_{i} = (\cup_{j=1}^{\infty}A_{j}) \cup (\cup_{k=1}^{\infty}A_{k})$\\
+$A_{j} \in 2^{\{0,1,...,n\}} \Rightarrow (\cup_{j=1}^{\infty}A_{j}) \in 2^{\{0,1,...,n\}} \Rightarrow (\cup_{j=1}^{\infty}A_{j}) \in \mathcal{F}_{n}$\\
+$A^c_{k} \in  2^{\{0,1,...,n\}} \Rightarrow (\cap_{k=1}^{\infty}A^c_{k}) \in 2^{\{0,1,...,n\}} \Rightarrow (\cup_{k=1}^{\infty}A_{k})^c \in 2^{\{0,1,...,n\}} \Rightarrow (\cup_{k=1}^{\infty}A_{k})^c \in \mathcal{F}_{n} \Rightarrow (\cup_{k=1}^{\infty}A_{k}) \in \mathcal{F}_{n}$ by the construction of $\mathcal{F}_{n}$\\
+$\therefore \cup_{i=1}^{\infty}A_{i} \in \mathcal{F}_{n}$, hence we've shown that $\mathcal{F}_{n}$ is an increasing sequence of sigma fields\\
+Let $A_{i} = \{2i\}$, then $\forall i, \exists n_{i} \in \mathbb{N}, A_{i} \in \mathcal{F}_{n_{i}}$, then $A_{i} \in \cup_{n=1}^{\infty}\mathcal{F}_{n}$\\
+Then $B = \cup_{i}^{\infty}A_{i} = $\{all even numbers\}, $B^c = (\cup_{i}^{\infty}A_{i})^c = $ \{all odd numbers\} \\
+where we know $\nexists n \in \mathbb{N}$ s.t. $B$, or $B^c \in 2^{\{0,1,...,n\}}$, in other words, $B, B^c \not\in \mathcal{F}_{n}, \forall n \in \mathbb{N}$\\
+Since full union $\cup_{i}^{\infty}A_{i}$ must be in one of the $\mathcal{F}_{n}$ in order to be in $\cup_{n=1}^{\infty}\mathcal{F}_{n}$\\
+Therefore $\cup_{i}^{\infty}A_{i} \not\in \cup_{n=1}^{\infty}\mathcal{F}_{n}$, $\cup_{n=1}^{\infty}\mathcal{F}_{n}$ is not a $\sigma$-field
+\end{proof}
+
+
+\begin{problem}{3(a)}
+\end{problem}
+\begin{proof}
+Let $C = \{ \{1,2\}, \{2,3\}, \{3,4\}, \{1,4\} \}$, define two distinct probabilities on $(\Omega, \mathcal{F})$:\\
+$P_{1}(\{1\}) = \frac{2}{12}, P_{1}(\{2\}) = \frac{4}{12}, P_{1}(\{3\}) = \frac{2}{12}, P_{1}(\{4\}) = \frac{4}{12}$\\
+$P_{2}(\{1\}) = \frac{4}{12}, P_{2}(\{2\}) = \frac{2}{12}, P_{2}(\{3\}) = \frac{4}{12}, P_{2}(\{4\}) = \frac{2}{12}$\\
+where $P_{1}(\Omega) = P_{2}(\Omega) = 1$\\
+$\therefore P_{1}(\{1,2\}) = P_{2}(\{1,2\}) = \frac{1}{2}, P_{1}(\{2,3\}) =P_{2}(\{2,3\}) = \frac{1}{2}$\\
+$P_{1}(\{3,4\}) =P_{2}(\{3,4\}) = \frac{1}{2}, P_{1}(\{1,4\}) =P_{2}(\{1,4\}) = \frac{1}{2}$\\
+$\therefore P_{1}, P_{2}$ agrees on $C$\\
+\\
+Then it suffices to show that $\sigma(C) = \mathcal{F}$:\\
+$\sigma(C)$ must be closed under countable unions of subsets, which includes all subsets of three and four elements (i.e. unions of elements in $C$): $\{1,2,3\}, \{1,2,4\}, \{2,3,4\}, \{1,3,4\}, \{1,2,3,4\}$\\
+Meanwhile, it must contain the complements of these subsets, which includes all the singleton and the empty set: $\{1\}, \{2\}, \{3\}, \{4\}, \emptyset$, and also their unions: $\{1,3\} , \{2,4\}$\\
+$\therefore \sigma(C) = 2^{\{1,2,3,4\}} = \mathcal{F}$
+\end{proof}
+
+
+
+\begin{problem}{3(b)}
+\end{problem}
+\begin{proof}
+Let $\hat{C} = \{A: A^c\in C\}$, then we can show that $\hat{C}$ is a $\pi$-system:\\
+$\forall A,B \in \hat{C} \Rightarrow A^c, B^c \in C \Rightarrow A^c \cup B^c \in C \Rightarrow (A\cap B)^c \in C \Rightarrow A\cap B \in \hat{C}$ by the definition of $C, \hat{C}$\\
+Then if we know two probabilites $P_{1}, P_{2}$ agree on $\hat{C}$, it would agree on $\sigma(\hat{C})$ by $\pi - \lambda$ theorem\\
+Since we know $P_{1}, P_{2}$ agree on ${C}$,\\
+$\forall A \in C \subset \mathcal{F}, P_{1}(A) = P_{2}(A) \Rightarrow P_{1}(A^c) = P_{2}(A^c) = 1- P_{1}(A) = 1 - P_{2}(A)$, since $(\Omega, \mathcal{F})$ is a measurable space, where $A^c$ is an arbitrary set in $\hat{C}$\\
+($\forall A^c \in \hat{C}, \exists A \in C$ from the construction of $\hat{C}$)\\
+Then $P_{1}, P_{2}$ agree on $\hat{C}$, hence agree on $\sigma(\hat{C})$, thus it suffices to show that $\sigma(\hat{C}) = \mathcal{F}$\\
+Let $A \in \sigma(C)=\mathcal{F} \Rightarrow A^c \in \sigma(C)$, and $A^c \in \hat{C}$ by definition\\
+Then $A^c \in \sigma(\hat{C}), (A^c)^c \in \sigma(\hat{C}) \Rightarrow A \in \sigma(\hat{C})$\\
+$\therefore \mathcal{F} = \sigma(C) \subseteq \sigma(\hat{C})$, and since $\sigma(\hat{C}) \subseteq \mathcal{F}$ for the reason that it is the smallest unique $\sigma$-field containing $\hat{C}$, we've showed that $\sigma(\hat{C}) = \mathcal{F}$\\
+Thus $P_{1}, P_{2}$ agree on $\mathcal{F}$
+\end{proof}
+
+
+\begin{problem}{3(c)}
+\end{problem}
+\begin{proof}
+No, use the same counterexample from 3(a):\\
+$C = \{ \{1,2\}, \{2,3\}, \{3,4\}, \{1,4\} \} \subset \mathcal{F}$ is closed under complementation and it has been shown that $\sigma(C) = \mathcal{F}$\\
+However, we've shown that $P_{1}, P_{2}$ agree on $C$ but they do not agree on $\mathcal{F}$
+\end{proof}
+
+
+
+\end{document}

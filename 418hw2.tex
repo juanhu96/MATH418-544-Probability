@@ -1,0 +1,112 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm} \large{MATH 418/544 Assignment 2}}
+\author{\large{ Jingyuan Hu (Juan) \#41465155}}
+\date{}
+\maketitle
+ 
+\begin{problem}{1}
+\end{problem}
+\begin{proof}
+$\mu(E) \ge 0, \forall E \in \mathcal{F}_{0}$ by definition, and $\mu(\emptyset) = 0$ since $\not\exists [x, \infty) \subset \emptyset, \forall x >0$. Also, since $[1,\infty) \subset \mathbb{R}$, we have $\mu(R) = 1$.
+Let $\{A_{j}\}_{j=1}^{N}$ be a finite sequence of arbitrary disjoint sets in $\mathcal{F}_{0}$ (without loss of generality). Then at most one of the $A_{1}, A_{2}, ... A_{N}$ has a measure 1 since if more than two sets has measure 1, say $\mu(A_{1}) = \mu(A_{2}) = 1$. This means:\\
+$$\exists x_{1} > 0, [x_{1}, \infty) \subset A_{1}, \exists x_{2} > 0, [x_{2}, \infty) \subset A_{2}$$
+Without loss of genearality, suppose $x_{1} \ge x_{2}$, then $[x_{1},\infty) \subset [x_{2},\infty) \subset A_{2}$, which means $A_{1}, A_{2}$ are not disjoint, this leads to a contradiction.
+Therefore there can only be two cases:\\
+(i) $\exists k, \exists x, [x, \infty) \subset A_{k}$, therefore $\exists x,[x, \infty) \subset \bigcup\limits_{j=1}^{N}A_{j}$.
+Then $\sum\limits_{j=1}^{\infty} \mu(A_{j}) = 1$, and $\mu(\bigcup\limits_{j=1}^{N}A_{j}) = 1$\\
+(ii) $\forall j, \not\exists x, [x, \infty) \subset A_{j}$, therefore $\not\exists x,[x, \infty) \not\subset \bigcup\limits_{j=1}^{N}A_{j}$.
+Then $\sum\limits_{j=1}^{N} \mu(A_{j}) = \mu(\bigcup\limits_{j=1}^{N}A_{j}) = 0$
+\\
+Hence in either case $\mu(\bigcup\limits_{j=1}^{N}A_{j}) = \sum\limits_{j=1}^{N} \mu(A_{j})$, so we've shown $\mu$ is a finitely additive probability\\
+\\
+Let $A_{n} = (n, n+1]$, then $\{A_{n}\}_{n=1}^{\infty}$ is a countable sequence of sets in $\mathcal{F}_{0}$, where each of them by definition $\mu(A_{n})=0$ since $\forall n, \not\exists x, [x,\infty) \subset (n, n+1]$.
+But: $$\mu(\bigcup\limits_{n=1}^{\infty}A_{n}) = \mu([1,\infty)) = 1 \neq \sum\limits_{n=1}^{\infty} \mu(A_{n}) = 0$$\\
+Therefore countable additivity does not hold, and hence $\mu$ is not a probability measure on $(\mathbb{R}, \mathcal{F}_{0})$
+\end{proof}
+
+
+
+
+\begin{problem}{2}
+\end{problem}
+ 
+\begin{proof}
+Let $a = (m_{1}, m_{2}, ..., m_{i}, ..., m_{d})$ and $b = (m_{1}, m_{2}, ..., m'_{i}, ..., m_{d})$ be two d-timensional vectors where $a, b \in \mathbb{R}^d$ and $m_{i} \le m'_{i}$.
+Without loss of generality (we can take $i = 1,2,...,d$), to show $F(x_{1},..., x_{d})$ is non-decreasing is equivalent to show $F(a) \le F(b)$.
+By definition of distribution function and \textit{theorem 1.21}, there exist a unique probability measure $P$ s.t. $P((-\infty, x]) = F(x)$. Hence it suffcies to show: $$P((-\infty, a]) \le P((-\infty, b])$$\\
+For a d-dimensional vector $x = (x_{1},..., x_{d}) \in (-\infty, a], x \in (-\infty, b]$ hence $(-\infty, a] \subseteq (-\infty, b]$, and from the monotonicity property of probability measure $P$, we know that $P((-\infty, a]) \le P((-\infty, b])$, so $F$ is non-decreasing in each variable $x_{i}$
+\end{proof}
+
+
+
+\begin{problem}{3}
+\end{problem}
+\begin{proof}
+An example that satisfies $(a)-(c)$ but not a two-dimensional distribution function would be:\\
+\[
+  F(x,y) =
+  \begin{cases}
+  1 & \text{if $x,y\ge1$} \\
+  1 & \text{if $x\ge1$ and $0 \le y <1$} \\
+  1 & \text{if $0 \le x <1$ and $y\ge1$} \\
+  0 & \text{otherwise}
+  \end{cases}
+\]
+where $F(x,y)$ is non-decreasing in $x$ and $y$, which satisfies $3(a)$.\\
+However, when $a = (0,0), b = (1,1)$ then $$\Delta_{(a,b]} = (F(1,1) - F(0,1)) - (F(1,0) - F(0,0)) = (1-1) - (1-0)  = -1 < 0$$ which violates $2(i)$ and also says that it is not a distribution function.
+We can also verify that $\lim\limits_{(x',y') \downarrow (x,y)} F(x',y') = F(x,y)$ for $x' \ge x, y' \ge y$, since the function at region below $x\le1, y\le1$ is always 0 and always 1 when $x>1, y>1$. At the frontier of $x=1$ or $y=1$, $F(x,y)=1$ and $F(x',y
+')$ approaching from above is also 1.\\
+Besides, $\lim\limits_{x \rightarrow \infty, y \rightarrow \infty} F(x,y) = 1$, and $\lim\limits_{x \downarrow -\infty} F(x,y) = 0$ since $x\le 0, F(x,y)=0$, and $\lim\limits_{y \downarrow -\infty} F(x,y) = 0$ since $y\le 0, F(x,y)=0$. So $F(x,y)$ satisfies $3(b),3(c)$.
+In conclusion $F(x,y)$ satisfies $(a)-(c)$ but is not a two-dimensional distribution function
+\end{proof}
+
+
+
+\begin{problem}{4(a)}
+\end{problem}
+
+\begin{proof}
+$F_{X} \prec F_{Y}$ by definition is equivalent to $$F_{X}(x) \ge F_{Y}(x), \forall x \in \mathbb{R} \iff P(Y \le x) \le P(X \le x), \forall x \in \mathbb{R}$$\\
+By subadditivity, $$P(Y \le x) = P(\{X \le Y\} \cap \{Y \le x\}) + P(\{X > Y\} \cap \{Y \le x\})$$ \\
+By monotonicity, $$\le P(\{X \le Y\} \cap \{Y \le x\}) + P(\{X > Y\})$$\\
+\\
+Since $\{X \le Y\} \cap \{Y \le x\} = \{X \le x\}$ and 
+\begin{equation}
+\begin{split}
+P(X > Y) &= P(\{X > x\} \cap \{Y \le x\}) = 1 - P(\{X \le x\} \cap \{Y > x\}) \\
+& \le 1 - P(\{X \le x\} \cap \{Y \ge x\}) = 1 - P(X\le Y) = 0\\
+\end{split}
+\end{equation}
+$\therefore P(Y \le x) \le P(\{X \le Y\} \cap \{Y \le x\}) + P(\{X > Y\}) \le P(X \le x), \forall x \in \mathbb{R}$\\
+$\therefore F_{X} \prec F_{Y}$
+\end{proof}
+
+
+
+\begin{problem}{4(b)}
+\end{problem}
+ 
+\begin{proof}
+Let  $\Omega = (0,1)$, $\mathcal{F} = \mathcal{B}(0,1)$, $P =$ Lebesgue measure\\
+$$F \prec G \iff F_{X} \prec F_{Y} \iff F_{X}(x) \ge F_{Y}(x), \forall x$$\\
+Consider $X,Y$: $X(\omega) =\sup\{x: F_{X}(x) \le \omega\} \in \mathcal{S}$ and
+$Y(\omega) =\sup\{x: F_{Y}(x) \le \omega\} \in \mathcal{S}$ where both are random variable defined on $\mathcal{F}$. Therefore $X-Y$ is also a random variable defined on $\mathcal{F}$ and $\{X-Y\le 0\}$ is also in $\mathcal{F}$.
+Let $x' \in  \{x: F_{X}(x) \le \omega\}$, which means $F_{X}(x') \le \omega$, so $F_{Y}(x') \le F_{X}(x') \le \omega$, then $x' \in  \{x: F_{Y}(x) \le \omega\}$.
+This shows $\{x: F_{X}(x) \le \omega\} \subset \{x: F_{Y}(x) \le \omega\}$, so we know $X(\omega) \le Y(\omega)$ by the property of supremum. So $P(X\le Y) = P(\{\omega \in(0,1): X(\omega) \le Y(\omega)\}) = P((0,1)) = 1$.
+Also, for $\omega \in \Omega = (0,1)$, $\lim\limits_{x\rightarrow \infty}P(\{\omega: X(\omega) \le x\}) = P(\Omega) = 1$
+and $\lim\limits_{x\rightarrow -\infty}P(\{\omega: X(\omega) \le x\}) = P(\emptyset) = 0$\\
+Therefore $X,Y$ are random variables on some probability space $((0,1), \mathcal{B}(0,1), m)$ with $P(X \le Y) = 1$
+\end{proof}
+
+\end{document}

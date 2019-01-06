@@ -1,0 +1,136 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm}\large MATH 418/544 Assignment 6}
+\author{\large Jingyuan Hu (Juan) \#41465155}
+\date{}
+\maketitle
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{1(a)}
+\end{problem}
+ 
+\begin{proof}
+By definition, the characteristic funciton of geometric distribution with $p \in (0,1)$ is
+\begin{equation}
+\begin{split}
+\phi_{X}(t) &= E[e^{itx}] = \sum_{n=1}^{\infty} e^{itn}P_{X}(n)= \sum_{n=1}^{\infty} e^{itn}P(X=n) = \sum_{n=1}^{\infty} e^{itn}p(1-p)^{n-1} \\
+&= pe^{it}\sum_{n=1}^{\infty}\big[e^{it}(1-p)\big]^{n-1} = \frac{pe^{it}}{1-(1-p)e^{it}} = \frac{p}{e^{-it} - (1-p)}
+\end{split}
+\end{equation}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{1(b)}
+\end{problem}
+ 
+\begin{proof}
+The density of the unifrom distribution is: $f_{X}(x) = \frac{1}{2a}1_{[-a,a]}(x)$.
+Therefore by definition, the characteristic funciton of uniform distribution is:
+\begin{equation}
+\phi_{X}(t) = E[e^{itx}] = \int_{-a}^{a} \frac{e^{itx}}{2a}dx = \int_{-a}^{a} \big[\frac{cos(tx)}{2a}+i\frac{sin(tx)}{2a}\big]dx = \int_{-a}^{a} \frac{cos(tx)}{2a}dx
+\end{equation}
+When $t = 0$, we have $\phi_{X}(t) = \int_{-a}^{a} \frac{1}{2a} dx = 1$ and when $t \neq 0$, we have $\phi_{X}(t) = \frac{sin(tx)}{2at}|_{-a}^{a} = \frac{sin(at)}{at}$. In summary, the characteristic function is:
+\[\phi_{X}(t)=
+\begin{cases}
+\frac{sin(at)}{at} & \text{if $t\neq0$} \\
+1 & \text{if $t=0$} \\
+\end{cases}
+\]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{2}
+\end{problem}
+
+\begin{proof}
+From the question we have
+\begin{equation}
+\begin{split}
+p_{k} &= (2\pi)^{-1}\int_{-\pi}^{\pi}e^{-itk}\phi_{X}(t)dt 
+= (2\pi)^{-1}\int_{-\pi}^{\pi}\int e^{-itk}e^{itx}dPdt\\
+&= (2\pi)^{-1}\int\int_{-\pi}^{\pi} e^{it(x-k)}dtdP \text{ by Fubini's since } |e^{it(x-k)}|=1 \text{ is integrable} \\
+\end{split}
+\end{equation}
+Notice that $X$ is integer valued and $k\in \mathbb{Z}$, so $x-k \in \mathbb{Z}$. Then we have $\int_{-\pi}^{\pi} \frac{e^{it(x-k)}}{2\pi} = 1_{(x = k)}$, and hence
+\begin{equation}
+p_{k} = (2\pi)^{-1}\int1_{(x = k)}dP = P(x=k)
+\end{equation}
+which is the the probability of mass function at $k$ by definition.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{3}
+\end{problem}
+
+\begin{proof}
+Let $X_{i}$ be the round-off of the $i$th number, then $\{X_{n}: n\in \mathbb{N}, n \le 25\}$ are a sequence of i.i.d random variables. Then we have $E(X_{i}) = 0$,
+$\sigma^2 = E(X_{i}^2) - E(X_{i})^2 = \int_{-0.5}^{0.5}x^2dx = \frac{x^3}{3}|_{-0.5}^{0.5} = \frac{1}{12} < \infty$. Denote $S_{n} = \sum_{i=1}^{n}X_{i}$, since the sum of rounded numbers equals to rounded sum of the unrounded numbers, we have:
+\begin{equation}
+\begin{split}
+P(-0.5 < S_{25} < 0.5) &= 
+P(\frac{-0.5}{\sqrt{25/12}} < \frac{S_{25}}{\sqrt{\sigma^2 25}} < \frac{0.5}{\sqrt{25/12}})\\
+&\approx P(-\frac{\sqrt{3}}{5} < \frac{S_{25}}{\sqrt{\sigma^2 25}} < \frac{\sqrt{3}}{5})\\
+&\text{ where } \frac{S_{25}}{\sqrt{\sigma^2 25}} \sim N(0,1) \text{ by Central Limit Theorem}\\
+&\approx P(-0.35 < Z < 0.35) \text{ where } Z = \frac{S_{25}}{\sqrt{\sigma^2 25}}\\
+&\approx 0.2736
+\end{split}
+\end{equation}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{4}
+\end{problem}
+
+\begin{proof}
+Let $\{X_{i}: i\in \mathbb{N}\}, \{Y_{i}: i\in \mathbb{N}\}$ be sequences of i.i.d random variables, where $X_{i}, Y_{i}$ is the time to make the $i$th double decaf skim milk for George and Julia respectively, and $\{X_{i}\},\{Y_{i}\}$ are independent. 
+Then we have $E[X_{i}] = E[Y_{i}]$ and same standard deviation $\sigma_{X_{i}} = \sigma_{Y_{i}} = 4$.
+Denote $D_{i} = Y_{i} - X_{i}$, then we have $E[D_{i}] = E[Y_{i}] - E[X_{i}] =0$ and $\sigma^2_{D_{i}} = \sigma^2_{Y_{i}} + \sigma^2_{X_{i}} = 32$.
+Also denote $S_{n} = \sum_{i=1}^{n}D_{i}$, then the probability that Goerge will get the prize is:
+\begin{equation}
+\begin{split}
+P(S_{200} > 80) &= P(\sum_{i=1}^{n}D_{i} > 80)
+=P(\frac{S_{200}}{\sqrt{200\sigma^2_{D_{i}}}} \ge \frac{80}{\sqrt{200\sigma^2_{D_{i}}}})
+= P(\frac{S_{200}}{\sqrt{200\sigma^2_{D_{i}}}} \ge \frac{80}{\sqrt{200\times 32}})\\
+&\approx P(Z \ge 1) \text{ by Central limit theorem, where }
+Z = \frac{S_{200}}{\sqrt{200\sigma^2_{D_{i}}}} \sim N(0,1)\\
+&= \int_{1}^{\infty}\frac{e^{-x^2/2}}{\sqrt{2\pi}}dx
+\end{split}
+\end{equation}
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{5}
+\end{problem}
+
+\begin{proof}
+Since $\{X_{n}\}$ are i.i.d Cauchy random variables and $S_{n} = \sum_{k=1}^{n}X_{k}$,
+\begin{equation}
+\begin{split}
+\lim_{n\rightarrow \infty}\phi_{S_{n}/n}(t) &= \lim_{n\rightarrow \infty}E[e^{it(S_{n}/n)}] = \lim_{n\rightarrow \infty}E[e^{i\frac{t}{n}S_{n}}] \\
+&= \lim_{n\rightarrow \infty}\phi_{S_{n}}(\frac{t}{n}) = [\phi_{X_{1}}(\frac{t}{n})]^n
+= (e^{-|t|/n})^n = e^{-|t|} = \phi_{X_{1}}(t)
+\end{split}
+\end{equation}
+Since $\phi_{S_{n}/n}(t)$ converges for all $t$ and the limit $\phi_{X_{1}}(t)$ is continuous at 0, by Levy's continuity theorem we know $S_{n}/n$ has the same distribution as $X_{1}$, and hence the limiting distribution is Cauchy.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

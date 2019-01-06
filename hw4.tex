@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+ \usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm}\large MATH 418/544 Assignment 4}
+\author{\large Jingyuan Hu (Juan) \#41465155}
+\date{}
+\maketitle
+ 
+\begin{problem}{1(a)}
+\end{problem}
+ 
+\begin{proof}
+Let $A_{n} = \{X \ge \frac{1}{n}\}$, by Markov inequality we have $P(X \ge x) \le \frac{E(X)}{x}, \forall x > 0$, and $E(X) = 0$ by assumption. Then we have $P(A_{n}) = P(\{X \ge \frac{1}{n}\}) \le 0$ for all $n$. Also, $A_{n} \uparrow A = \{X > 0\}$. Thus by continuity from below we have $P(A) = P(\bigcup\limits_{n=1}^{\infty}A_{n}) = \lim\limits_{n\rightarrow \infty}P(A_{n}) = 0$, which means $P(\{X > 0\})=0$. Given that $X$ is a non-negative random variable, we can conclude that $X = 0$ almost surely.
+\end{proof}
+
+\begin{problem}{1(b)}
+\end{problem}
+ 
+\begin{proof} We will prove the statement from either direction:\\
+$(\Rightarrow)$ Suppose $Y$ is a constant random variable with finite mean $\mu$, then $Y = \mu$ almost surely, $Y^2 = \mu^2$ almost surely. Therefore by definition we have $\sigma_{Y}^2 = E(Y^2) - [E(Y)]^2 = \mu^2 - \mu^2 = 0$\\
+$(\Leftarrow)$ $\sigma_{Y}^2 = 0$, by Chebyshev inequality, we know that $P(|Y-\mu|\ge x) \le \frac{\sigma_{Y}^2}{x^2} = 0$ for all $x >0$. Let $A_{n} = \{|Y-\mu|\ge \frac{1}{n}\}$, then $P(A_{n}) \le 0$ and $A_{n} \uparrow A = \{|Y-\mu| > 0\}$. By continuity from below we have 
+$$P(|Y-\mu| > 0) = P(\bigcup\limits_{n=1}^{\infty} \{|Y-\mu|\ge \frac{1}{n}\}) = \lim\limits_{n\rightarrow \infty}P(|Y-\mu|\ge \frac{1}{n}) = 0$$ where $|Y-\mu| \ge 0$. Therefore $Y - \mu = 0$ almost surely, thus $Y = \mu$ almost surely.
+\end{proof}
+
+\begin{problem}{2}
+\end{problem}
+ 
+\begin{proof}
+Since $Y$ is non-negative and $p>0$, then $Y^p$ is non-negative, by definition of expectation, we have 
+\begin{equation}
+\begin{split}
+E(Y^p) &= \int_{\Omega}Y^p(\omega)dP(\omega) = \int_{\mathbb{R}}y^pdP_{Y}(y) \\
+&= \int_{\mathbb{R}} \big[\int_{0}^{y} px^{p-1}dx\big]dP_{Y}(y) \text{ since } y^p = \int_{0}^{y} px^{p-1}dx\\ 
+&= \int_{0}^{\infty} \big[\int_{\mathbb{R}} 1_{x\le y}px^{p-1}dP_{Y}(y)\big]dx \text{ by Fubini's theorem since } x\ge0,p > 0 \text{, integrand non-negative}\\
+&= \int_{0}^{\infty} P(Y \ge x)px^{p-1}dx
+\end{split}
+\end{equation}
+\end{proof}
+
+\begin{problem}{3(a)}
+\end{problem}
+ 
+\begin{proof}
+Let $X$ be discrete random variable that takes value $-x$ or $x$ (where $x$ is a fixed value) such that $P(X = -x) = P(X = x) = \frac{1}{2}$. Then we have $\mu = E(X) = 0, \sigma^2 = x^2$. Therefore, $P(|X-0|\ge x) = 1 = \frac{\sigma^2}{x^2}$ holds.
+\end{proof}
+
+\begin{problem}{3(b)}
+\end{problem}
+ 
+\begin{proof}
+Let $X$ be an arbitrary random variable with finite mean $\mu$ such that the equality holds in Chebyshev's inequality. Then we have $P(|X-\mu| \ge x) = \frac{\sigma^2}{x^2}$ for all $x>0$ and by property of probability we know $P(|X-\mu| \ge x) \le 1$. Suppose $\sigma^2 \neq 0$, then $\sigma^2 = \epsilon > 0$ for some $\epsilon$, we can pick $x^2 = \frac{\epsilon}{2}, x = \sqrt{\frac{\epsilon}{2}} > 0$ such that $P(|X-\mu| \ge x) = \frac{\sigma^2}{x^2} = \epsilon/\frac{\epsilon}{2} = 2$, which leads to contradiction. Therefore $\sigma^2 =0$, by \textit{part(b) in question 1}, X must be a constant. Therefore there is no non-constant random variable with finite mean so that the ineqaulity holds for all $x>0$.
+\end{proof}
+
+
+\begin{problem}{4}
+\end{problem}
+ 
+\begin{proof}
+Without loss of genearlity, assume $0 < p_{1} < p_{2} < \infty$. Then to show $||X||_{p} = \big[\int |X|^{p}dP\big]^{1/p}$ is a monotone non-decreasing function on $(0, \infty)$, it suffices to show: $\big[\int |X|^{p_{2}}dP\big]^{1/p_{2}} \ge \big[\int |X|^{p_{1}}dP\big]^{1/p_{1}}$, which is equivalent to $\int |X|^{p_{2}}dP \ge \big[\int |X|^{p_{1}}dP\big]^{p_{2}/p_{1}}$.
+By the definition of expectation, this is also same as showing
+\begin{equation}
+E(|X|^{p_{2}}) \ge \big[E(|X|^{p_{1}})\big]^{p_{2}/p_{1}}
+\end{equation}
+Since $||X||_{p}$ may be $\infty$, let $X_{n} = (|X|^{p_{2}} \wedge n^{p_{2}})$ and $Y_{n} = (|X|^{p_{1}} \wedge n^{p_{1}})$, then $X_{n}, Y_{n} \ge 0$ for all $n$ are non-decreasing and $X_{n} \uparrow \big|X\big|^{p_{2}}, Y_{n} \uparrow \big|X\big|^{p_{1}}$.
+By monotone convergence theorem, we have $\int X_{n}dP \uparrow \int |X|^{p_{2}}dP$ and $\int Y_{n}dP \uparrow \int |X|^{p_{1}}dP$, in other words 
+\begin{equation}
+E(X_{n})\uparrow E(|X|^{p_{2}}), E(Y_{n})\uparrow E(|X|^{p_{1}})
+\end{equation}
+By Jensen's inequality, 
+\begin{equation}
+E(X_{n}) = E(Y_{n}^{p_{2}/p_{1}}) \ge [E(Y_{n})]^{p_{2}/ p_{1}}
+\end{equation}
+for all $n$ since $Y_{n}$ is intergable and $\phi(z) = z^{p_{2}/ p_{1}}$ is a convex function on $(0,\infty)$ where $P((0,\infty)) = 1$. (The convexity can be shown since for a twice differentiable function of a single variable $\phi(z)$, the second derivative $\frac{p2}{p1}(\frac{p2}{p1}-1)z^{\frac{p2}{p1} - 2} \ge 0$ for all $z$ on $(0,\infty)$)
+Then, by (3),(4) we have $E(|X|^{p_{2}}) \ge [E(|X|^{p_{1}})]^{p_{2}/ p_{1}}$, which is inequality (2). Therefore, we can conclude that $p\rightarrow ||X||_{p}$ is a monotone non-decreasing function on $(0, \infty)$.
+\end{proof}
+
+\begin{problem}{5(a)}
+\end{problem}
+ 
+\begin{proof}
+Since $X, Y$ are random variables on with uniform distribution on $[0,2]$, then by definition we have $f_{X}(x) = 1_{[0,2]}(x)\frac{1}{2}, f_{Y}(y) = 1_{[0,2]}(y)\frac{1}{2}$. Also $X, Y$ are independent and by \textit{theorem 2.3(a)}, we have $f_{X,Y}(x,y) = f_{X}(x)f_{Y}(y) = \frac{1}{4}1_{[0,2]}(x)1_{[0,2]}(y)$, in other words, we can write as $f_{X,Y}(x,y) = \frac{1}{4}1_{[0,2]\times[0,2]}(x,y)$, which is the joint probability distribution function of $(X,Y)$.
+\end{proof}
+
+\begin{problem}{5(b)}
+\end{problem}
+
+\begin{proof}
+\begin{equation}
+\begin{split}
+P(X/Y \le t) &= E(1_{\{X/Y\le t\}}) = \int_{\mathbb{R}}\int_{\mathbb{R}} 1_{(x/y\le t)}dP_{X}(x)dP_{Y}(y) \\
+&= \int_{\mathbb{R}}\int_{\mathbb{R}} 1_{(x/y\le t)}f_{X}(x)f_{Y}(y)dxdy \\
+&= \frac{1}{4}\int_{0}^{2}\int_{0}^{2} 1_{(x/y\le t)}dxdy \text{ by 5(a)}
+\end{split}
+\end{equation}
+\textit{Case 1}: When $t < 0$, since $X,Y$ are uniform distributed on $[0,2]$, then $1_{(x/y\le t)} = 0$, $P(X/Y \le t) = 0$\\
+\textit{Case 2}: When $t \ge 0$, $\frac{1}{4}\int_{0}^{2}\int_{0}^{2} 1_{(x/y\le t)}dxdy = \frac{1}{4}\int_{0}^{2}\int_{0}^{ty \wedge 2}dxdy$. If $t \le 1$, we have $ty \le 2$, then $ty \wedge 2 = ty$, the integral becomes $\frac{1}{4}\int_{0}^{2}\int_{0}^{ty}dxdy = \frac{t}{2}$. Otherwise $t > 1$, in this case the integral would be the area of the trapezoid in the figure.\\
+\begin{center}
+\includegraphics[width=4.5cm, height=4cm]{image.png}\\
+\end{center}
+Hence $\frac{1}{4}\int_{0}^{2}\int_{0}^{ty \wedge 2}dxdy = \frac{1}{4} \times 2\times(2 + 2 - 2/t)/2= 1 - \frac{1}{2t}$.
+Therefore the distribution function for $X/Y$ is:
+\[F_{X/Y}(t)  = 
+  \begin{cases}
+  0 & \text{if $t < 0$} \\
+  \frac{t}{2} & \text{if $0 \le t \le 1$} \\
+  1 - \frac{1}{2t} & \text{if $t > 1$} \\
+  \end{cases}
+\]
+and $F_{X/Y}(t) = \int_{-\infty}^{t}f(t)dt$, then the probability density function of $X/Y$ would be:
+\[f_{X/Y}(t)  = 
+  \begin{cases}
+  \frac{1}{2} & \text{if $0 \le t \le 1$} \\
+  \frac{1}{2t^2} & \text{if $t > 1$} \\
+  0 & \text{$t < 0$}
+  \end{cases}
+\]
+\end{proof}
+
+
+\begin{problem}{6}
+\end{problem}
+ 
+\begin{proof}
+Let $(\Omega, \mathcal{F}, P) = ([0,1], \mathcal{B}([0,1]), m)$ where $m$ is the Lebesgue measure on $[0,1]$. Also let $A_{1}=[0,\frac{1}{2}], A_{2}=[\frac{1}{8},\frac{5}{8}], A_{3}=[\frac{3}{8},\frac{7}{8}]$, therefore $P(A_{1})=P(A_{2})=P(A_{3}) = \frac{1}{2}$ and $P(A_{1}\cap A_{2}\cap A_{3}) = P([\frac{3}{8}, \frac{1}{2}]) = \frac{1}{8} = P(A_{1})P(A_{2})P(A_{3})$. However $A_{1}, A_{2}$ are not independent because $P(A_{1}\cap A_{2}) = \frac{3}{8} \neq P(A_{1})P(A_{2}) = \frac{1}{4}$.
+\end{proof}
+\end{document}

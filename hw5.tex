@@ -1,0 +1,54 @@
+\documentclass[10pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+ \usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{\vspace{-1.6cm}\large MATH 418/544 Assignment 5}
+\author{\large Jingyuan Hu (Juan) \#41465155}
+\date{}
+\maketitle
+ 
+\begin{problem}{1}
+\end{problem}
+ 
+\begin{proof}
+Guess: $\frac{\sum_{k=1}^{n}S_{k}}{n^2} = \frac{\sum_{k=1}^{n}(X_{1}+X_{2}+...X_{k})}{n^2} \rightarrow  \frac{n(n+1)\mu}{2n^2} = \frac{\mu}{2}$. We will show this by:
+\begin{equation}
+\begin{split}
+E[(\frac{\sum_{k=1}^{n}S_{k}}{n^2} - \frac{\mu}{2})^2] &= \frac{1}{n^4}E[(\sum_{k=1}^{n}S_{k} - \frac{n^2\mu}{2})^2]\\
+&\le \frac{2}{n^4}E[(\sum_{k=1}^{n}S_{k} - \frac{n(n+1)\mu}{2})^2 + (\frac{n\mu}{2})^2)]\\
+&\le \frac{2}{n^4}\big(E[(\sum_{k=1}^{n}S_{k} - \frac{n(n+1)\mu}{2})^2] + E[(\frac{n\mu}{2})^2)]\big)\\
+&\le \frac{2}{n^4}\big(Var[\sum_{k=1}^{n}S_{k}] + \frac{n^2\mu}{4}\big)\\
+&\le \frac{2}{n^4}\big(\sum_{k=1}^{n} Var[X_{k}] + \frac{n^2\mu}{4}\big) \text{ since } X_{n} \text { are uncorrelated}\\
+&\le \frac{n(n+1)\sigma^2}{n^4}+ \frac{\mu^2}{2n^2} \rightarrow 0 \text{ as } n\rightarrow \infty
+\end{split}
+\end{equation}
+Therefore, $\frac{\sum_{k=1}^{n}S_{k}}{n^2} \rightarrow \frac{\mu}{2}$ in $L^2$ and hence converges in probability.
+\end{proof}
+
+\begin{problem}{2(c)}
+\end{problem}
+\begin{proof}
+
+\end{proof}
+
+
+
+\begin{problem}{1(a)}
+\end{problem}
+\begin{proof}
+
+\end{proof}
+
+
+
+
+
+\end{document}
